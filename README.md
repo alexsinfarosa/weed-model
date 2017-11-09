@@ -1,1 +1,0 @@
-# NEWA Pollen Tube Growth Model
