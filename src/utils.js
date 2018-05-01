@@ -18,6 +18,7 @@ export const matchIconsToStations = (protocol, station, state) => {
     network === "njwx" ||
     network === "miwx" ||
     network === "oardc" ||
+    network === "nysm" ||
     ((network === "cu_log" || network === "culog") && station.state !== "NY")
   ) {
     return station.state === postalCode || postalCode === "ALL"
@@ -45,7 +46,8 @@ export const networkTemperatureAdjustment = network => {
     network === "newa" ||
     network === "icao" ||
     network === "njwx" ||
-    network === "oardc"
+    network === "oardc" ||
+    network === "nysm"
   ) {
     return "23";
   } else if (
@@ -62,6 +64,7 @@ export const networkHumidityAdjustment = network =>
 
 // Handling Michigan state ID adjustment
 export const michiganIdAdjustment = station => {
+  // Michigan
   if (
     station.state === "MI" &&
     station.network === "miwx" &&
@@ -70,6 +73,17 @@ export const michiganIdAdjustment = station => {
     // example: ew_ITH
     return station.id.slice(3, 6);
   }
+
+  // NY mesonet
+  if (
+    station.state === "NY" &&
+    station.network === "nysm" &&
+    station.id.slice(0, 5) === "nysm_"
+  ) {
+    // example: nysm_spra
+    return station.id.slice(5, 9);
+  }
+
   return station.id;
 };
 
