@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { inject, observer } from "mobx-react";
+import React, {Component} from 'react'
+import {inject, observer} from 'mobx-react'
 
-import { Flex, Box } from "rebass";
+import {Flex, Box} from 'rebass'
 import {
   LineChart,
   Line,
@@ -10,32 +10,32 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Brush
-} from "recharts";
+  Brush,
+} from 'recharts'
 
-@inject("store")
+@inject('store')
 @observer
 export default class PCEgraph extends Component {
   render() {
-    const { graphData, station, state } = this.props;
+    const {graphData, station, state} = this.props
     return (
       <Flex
         column
         bg="white"
         p={1}
         mb={[1, 2, 3]}
-        style={{ borderRadius: "5px" }}
+        style={{borderRadius: '5px'}}
       >
         <Box mb={1} f={[1, 2, 3]}>
           Percent Cumulative Emergence (PCE) for {station.name}, {state.name}
         </Box>
 
-        <Box style={{ width: "100%", height: "35vh" }}>
+        <Box style={{width: '100%', height: '35vh'}}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={graphData}
-              margin={{ top: 15, right: 0, left: -23, bottom: 15 }}
-              style={{ background: "#fafafa", borderRadius: "5px" }}
+              margin={{top: 15, right: 0, left: -23, bottom: 15}}
+              style={{background: '#fafafa', borderRadius: '5px'}}
             >
               <XAxis
                 dataKey="date"
@@ -45,7 +45,7 @@ export default class PCEgraph extends Component {
                 interval="preserveStartEnd"
                 axisLine={false}
               />
-              <YAxis unit="%" type="number" domain={["dataMin", "dataMax"]} />
+              <YAxis unit="%" type="number" domain={['dataMin', 'dataMax']} />
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
               {graphData.length >= 20 && (
@@ -77,6 +77,6 @@ export default class PCEgraph extends Component {
           </ResponsiveContainer>
         </Box>
       </Flex>
-    );
+    )
   }
 }
